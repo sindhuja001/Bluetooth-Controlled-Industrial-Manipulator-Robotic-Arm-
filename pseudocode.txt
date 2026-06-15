@@ -1,0 +1,68 @@
+BEGIN
+
+  // Motor Pins
+  Set pinMode(Motor1_Pin1, OUTPUT)
+  Set pinMode(Motor1_Pin2, OUTPUT)
+  Set pinMode(Motor2_Pin1, OUTPUT)
+  Set pinMode(Motor2_Pin2, OUTPUT)
+  Set pinMode(Enable1, OUTPUT)
+  Set pinMode(Enable2, OUTPUT)
+
+  // Servo Motors
+  Attach Servo1 to Servo1_Pin
+  Attach Servo2 to Servo2_Pin
+  Attach Servo3 to Servo3_Pin
+
+  // Communication
+  Begin Serial Communication at 9600 baud
+  Begin Bluetooth Communication at 9600 baud
+
+  Set MotorSpeed ← 250
+
+LOOP FOREVER
+
+  IF Bluetooth data is available THEN
+
+      command ← Read Bluetooth data
+
+      // Car Movement Control
+      IF command = 'F' THEN
+          Move Car Forward
+          Set MotorSpeed to 250
+
+      ELSE IF command = 'B' THEN
+          Move Car Backward
+          Set MotorSpeed to 250
+
+      ELSE IF command = 'L' THEN
+          Turn Car Left
+          Set MotorSpeed to 250
+
+      ELSE IF command = 'R' THEN
+          Turn Car Right
+          Set MotorSpeed to 250
+
+      ELSE IF command = 'S' THEN
+          Stop All Motors
+          Set MotorSpeed to 0
+
+      // Servo Arm Control
+      ELSE IF 40 ≤ command < 100 THEN
+          Servo1_Angle ← Map command from (40–100) to (0–90)
+          Rotate Servo1 to Servo1_Angle
+
+      ELSE IF 100 ≤ command < 200 THEN
+          Servo2_Angle ← Map command from (100–200) to (0–90)
+          Rotate Servo2 to Servo2_Angle
+
+      ELSE IF 200 ≤ command ≤ 250 THEN
+          Servo3_Angle ← Map command from (200–250) to (0–60)
+          Rotate Servo3 to Servo3_Angle
+
+      END IF
+
+  END IF
+
+END LOOP
+
+END
