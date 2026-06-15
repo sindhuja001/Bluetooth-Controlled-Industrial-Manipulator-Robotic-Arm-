@@ -1,4 +1,4 @@
-# Pseudocode for Bluetooth-Controlled Robotic Car with Servo Arm
+# Bluetooth-Controlled Robotic Car with Servo Arm
 ## Description
 A robotic car controlled via Bluetooth that can move in all directions and operate a 3-servo robotic arm.
 
